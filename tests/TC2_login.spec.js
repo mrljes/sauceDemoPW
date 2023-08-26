@@ -1,15 +1,16 @@
 const {test, expext, expect} = require('@playwright/test')
+import {selectors} from './selectors/common';
 
 test('Sauce demo login test', async({page}) => {
     // This is for standard_user
     await page.goto('https://www.saucedemo.com/')
-    await page.locator('//*[@id="user-name"]').fill('standard_user')
-    await page.locator('//*[@id="password"]').fill('secret_sauce')
-    await page.click('//*[@id="login-button"]')
-    await page.click('//*[@id="react-burger-menu-btn"]')
-    await page.click('//*[@id="logout_sidebar_link"]')
+    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
+    await page.locator(selectors['passwordInput']).fill(selectors['password'])
+    await page.click(selectors['loginButton'])
+    await page.click(selectors['hamburgerBtn'])
+    await page.click(selectors['logoutBtn'])
     // This is for locked out user
-    await page.locator('//*[@id="user-name"]').fill('locked_out_user')
+    await page.locator(selectors['usernameInput']).fill('locked_out_user')
     await page.locator('//*[@id="password"]').fill('secret_sauce')
     await page.click('//*[@id="login-button"]')
     await expect(page.locator('//*[@id="login_button_container"]/div/form/div[3]/h3')).toHaveText('Epic sadface: Sorry, this user has been locked out.')

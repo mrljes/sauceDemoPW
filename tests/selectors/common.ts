@@ -1,0 +1,20 @@
+export const selectors={
+    "url" : "https://www.saucedemo.com/",
+    "usernameInput" : '//*[@id="user-name"]',
+    "passwordInput" : '//*[@id="password"]',
+    "userName" : 'standard_user',
+    "password" : 'secret_sauce',
+    "loginButton" : '//*[@id="login-button"]',
+    "headerText" : 'Swag Labs',
+    "shoppingcartButton" : '//*[@id="shopping_cart_container"]',
+    "hamburgerBtn" : '//*[@id="react-burger-menu-btn"]',
+    "productsHeaderText" : '//*[@id="header_container"]/div[2]/span',
+    "sortingProductButton" : '//*[@id="header_container"]/div[2]/div/span/select',
+    "productDescription" : '//*[@id="inventory_container"]/div/div[1]/div[2]',
+    "addToCartButton" : '//*[@id="add-to-cart-sauce-labs-backpack"]',
+    "twitterButton" : '//*[@id="page_wrapper"]/footer/ul/li[1]/a',
+    "facebookButton" : '//*[@id="page_wrapper"]/footer/ul/li[2]/a',
+    "linkedinButton" : '//*[@id="page_wrapper"]/footer/ul/li[3]/a',
+    "footerText" : '© ',
+    "logoutBtn" : '//*[@id="logout_sidebar_link"]'
+}

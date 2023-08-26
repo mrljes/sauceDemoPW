@@ -1,11 +1,20 @@
-const {test, expext, expect} = require('@playwright/test')
+import {selectors} from './selectors/common';
+import {test, expect, expext} from '@playwright/test';
 
 test('Sauce homepage test', async({page}) => {
-    await page.goto('https://www.saucedemo.com/')
-    await page.locator('//*[@id="user-name"]').fill('standard_user')
-    await page.locator('//*[@id="password"]').fill('secret_sauce')
-    await page.click('//*[@id="login-button"]')
-    await expect(page.getByText('Swag Labs')).toBeVisible();
-    await expect(page.locator('//*[@id="shopping_cart_container"]')).toBeVisible();
-    await page.pause()
+    await page.goto(selectors['url'])
+    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
+    await page.locator(selectors['passwordInput']).fill(selectors['password']) 
+    await page.click(selectors['loginButton'])
+    await expect(page.getByText(selectors['headerText'])).toBeVisible()
+    await expect(page.locator(selectors['shoppingcartButton'])).toBeVisible()
+    await expect(page.locator(selectors['hamburgerBtn'])).toBeVisible()
+    await expect(page.locator(selectors['productsHeaderText'])).toBeVisible()
+    await expect(page.locator(selectors['sortingProductButton'])).toBeVisible()
+    await expect(page.locator(selectors['productDescription'])).toBeVisible()
+    await expect(page.locator(selectors['addToCartButton'])).toBeVisible()
+    await expect(page.locator(selectors['twitterButton'])).toBeVisible()
+    await expect(page.locator(selectors['facebookButton'])).toBeVisible()
+    await expect(page.locator(selectors['linkedinButton'])).toBeVisible()
+    await expect(page.getByText(selectors['footerText'])).toBeVisible()
 })
