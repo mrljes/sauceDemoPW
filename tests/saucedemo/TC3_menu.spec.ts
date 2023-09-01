@@ -1,5 +1,5 @@
 const {test, expext, expect} = require('@playwright/test')
-import {selectors} from './selectors/common';
+import {selectors} from '../selectors/common';
 
 test('Sauce hamburger button test', async({page}) => {
     await page.goto(selectors['url'])
