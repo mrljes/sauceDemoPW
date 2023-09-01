@@ -1,47 +1,41 @@
-const {test, expext, expect} = require('@playwright/test')
-import {selectors} from './selectors/common';
+import {selectors} from '../selectors/common';
+import { standard_user , password, locked_user, problem_user, glitchy_user, random_password, random_user,  } from '../selectors/credentials'
+import { test, expect } from '../util/fixtures';
 
-test('Sauce demo login test', async({page}) => {
+test('Sauce demo login test', async({ loginPage, app }) => {
+
     // This is for standard_user
-    await page.goto(selectors['url'])
-    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await page.click(selectors['hamburgerBtn'])
-    await page.click(selectors['logoutBtn'])
+    await loginPage.navigate()
+    await loginPage.login( standard_user , password)
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.click(selectors['logoutBtn'], '')
+
+    
     // This is for locked out user
-    await page.locator(selectors['usernameInput']).fill(selectors['lockedOutUsername'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await expect(page.locator(selectors['lockedOutUserErrorMessage'])).toHaveText(selectors['errorMessageTextForLockedUser'])
-    await page.locator(selectors['usernameInput']).fill('')
-    await page.locator(selectors['passwordInput']).fill('')
+    await loginPage.login( locked_user , password)
+    await app.assertTextPresent(selectors['lockedOutUserErrorMessage'], 'Epic sadface: Sorry, this user has been locked out.')
+  
+
     // This is for problem user
-    await page.locator(selectors['usernameInput']).fill(selectors['problemUserName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await expect(page.locator(selectors['itemImage'])).toBeVisible();
-    await page.click(selectors['hamburgerBtn'])
-    await page.click(selectors['logoutBtn'])
+    await loginPage.login (problem_user , password)
+    await app.assertVisible(selectors['itemImage'], '')
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.click(selectors['logoutBtn'], '')
+
+
     // This is for glitchy user
-    await page.locator(selectors['usernameInput']).fill(selectors['glitchUserName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await page.click(selectors['hamburgerBtn'])
-    await page.click(selectors['logoutBtn'])
+    await loginPage.login (glitchy_user , password)
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.click(selectors['logoutBtn'], '')
+
+
     // This is for user with correct username and wrong password
-    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['wrongPassword'])
-    await page.click(selectors['loginButton'])
-    await expect(page.locator(selectors['wrongPasswordErrorMessage'])).toHaveText(selectors['errorMessageTextForWrongUserNameAndPassowrd'])
-    await page.locator(selectors['usernameInput']).fill('')
-    await page.locator(selectors['passwordInput']).fill('')
+    await loginPage.login (standard_user , random_password)
+    await app.assertVisible(selectors['wrongPasswordErrorMessage'], 'Epic sadface: Username and password do not match any user in this service')
+
+
     // This is for user with wrong username and correct password
-    await page.locator(selectors['usernameInput']).fill('testtest')
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await expect(page.locator(selectors['wrongPasswordErrorMessage'])).toHaveText(selectors['errorMessageTextForWrongUserNameAndPassowrd'])
-    await page.locator(selectors['usernameInput']).fill('')
-    await page.locator(selectors['passwordInput']).fill('')
-    await page.pause()
+    await loginPage.login (random_user, password)
+    await app.assertVisible(selectors['wrongPasswordErrorMessage'], 'Epic sadface: Username and password do not match any user in this service')
+    await app.pause(1000)
 })

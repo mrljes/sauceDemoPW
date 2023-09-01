@@ -1,24 +1,21 @@
-const {test, expext, expect} = require('@playwright/test')
 import {selectors} from '../selectors/common';
+import { standard_user , password,  } from '../selectors/credentials'
+import { test, expect } from '../util/fixtures';
 
-test('Sauce hamburger button test', async({page}) => {
-    await page.goto(selectors['url'])
-    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await page.click(selectors['hamburgerBtn'])
-    await page.click(selectors['closeHamburgerButton'])
-    await page.click(selectors['hamburgerBtn'])
-    await expect(page.locator(selectors['allItemsButton'])).toBeVisible()
-    await page.click(selectors['aboutButton'])
-    await expect(page.locator(selectors['textFromAnotherPage'])).toBeVisible()
-    await page.goBack();
-    await page.click(selectors['hamburgerBtn'])
-    await page.click(selectors['logoutBtn'])
-    await page.locator(selectors['usernameInput']).fill(selectors['userName'])
-    await page.locator(selectors['passwordInput']).fill(selectors['password'])
-    await page.click(selectors['loginButton'])
-    await page.click(selectors['hamburgerBtn'])
-    await expect(page.locator(selectors['resetAppBtn'])).toBeVisible()
-    await page.pause()
+test('Sauce hamburger button test', async({ loginPage, app }) => {
+    await loginPage.navigate()
+    await loginPage.login( standard_user , password)
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.click(selectors['closeHamburgerButton'], '')
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.assertVisible(selectors['allItemsButton'], '')
+    await app.click(selectors['aboutButton'], '')
+    await app.assertVisible(selectors['textFromAnotherPage'], '')
+    await app.goBack()
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.click(selectors['logoutBtn'], '')
+    await loginPage.login (standard_user , password)
+    await app.click(selectors['hamburgerBtn'], '')
+    await app.assertVisible(selectors['resetAppBtn'], '')
+    await app.pause(10)
 })
