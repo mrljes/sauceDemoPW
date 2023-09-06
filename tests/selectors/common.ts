@@ -16,6 +16,7 @@ export const selectors={
     "facebookButton" : '//*[@id="page_wrapper"]/footer/ul/li[2]/a',
     "linkedinButton" : '//*[@id="page_wrapper"]/footer/ul/li[3]/a',
     "footerText" : '//div[@class="footer_copy"]',
+
     "logoutBtn" : '//*[@id="logout_sidebar_link"]',
     "lockedOutUsername" : 'locked_out_user',
     "lockedOutUserErrorMessage" : '//*[@id="login_button_container"]/div/form/div[3]/h3',
@@ -31,4 +32,26 @@ export const selectors={
     "aboutButton" : '//*[@id="about_sidebar_link"]',
     "textFromAnotherPage" : '//*[@id="__next"]/div[2]/div[1]/div/div[1]/div[1]/div/div[4]/div[1]/a/button',
     "resetAppBtn" : '//*[@id="reset_sidebar_link"]',
+    //PARA BANK SLECTORS
+    "registerTxt" : '//*[@id="loginPanel"]/p[2]/a',
+    "firstNameReg" : '//*[@id="customer.firstName"]',
+    "lastNameReg" : '//*[@id="customer.lastName"]',
+    "adressReg" : '//*[@id="customer.address.street"]',
+    "cityReg" : '//*[@id="customer.address.city"]',
+    "stateReg" : '//*[@id="customer.address.state"]',
+    "zipReg" : '//*[@id="customer.address.zipCode"]',
+    "phoneReg" : '//*[@id="customer.phoneNumber"]',
+    "ssnReg" : '//*[@id="customer.ssn"]',
+    "usernameReg" : '//*[@id="customer.username"]',
+    "passwordReg" : '//*[@id="customer.password"]',
+    "confirmReg" : '//*[@id="repeatedPassword"]',
+    "registerBtn" : '//*[@id="customerForm"]/table/tbody/tr[13]/td[2]/input',
+    "welcomeH1" : '//*[@id="rightPanel"]/h1',
+    "logout" : '//*[@id="leftPanel"]/ul/li[8]/a',
+    "usernameLogin" : '//*[@id="loginPanel"]/form/div[1]/input',
+    "passwordLogin" : '//*[@id="loginPanel"]/form/div[2]/input',
+    "loggin" : '//*[@id="loginPanel"]/form/div[3]/input',
+    "errorPasswordOrUsername" : '//*[@id="rightPanel"]/p',
+
+    
 }
