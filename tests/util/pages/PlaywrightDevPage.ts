@@ -299,6 +299,7 @@ export class PlaywrightDevPage {
 
   async assertVisible(locator, value) {
     await expect(this.page.locator(locator)).toBeVisible();
+    return Boolean;
   }
 
   async assertNotVisible(locator, value) {
@@ -1033,6 +1034,12 @@ export class PlaywrightDevPage {
 
   // returns true if element is checked
   async checkIfElementIsChecked(locator) {
-    return await this.page.locator(locator).isChecked();
+    await this.page.locator(locator).isChecked();
   }
+  
+  async checkIfChecked(locator) {
+    await this.page.locator(locator).isChecked();
+    return Boolean;
+  }
+
 }
