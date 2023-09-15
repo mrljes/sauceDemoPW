@@ -52,7 +52,7 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Chrome'],
         video: "on",
-        baseURL: 'https://www.saucedemo.com/',
+        baseURL: 'https://parabank.parasoft.com/',
       },
     },
     // {
